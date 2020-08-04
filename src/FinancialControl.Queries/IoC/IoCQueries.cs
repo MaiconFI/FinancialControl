@@ -9,9 +9,7 @@ namespace FinancialControl.Queries.IoC
         public static void AddQueries(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ReadDbContext, ReadDbContext>();
-
-            var mongoConfiguration = configuration.GetSection("MongoDb").Get<MongoConfiguration>();
-            services.AddSingleton<IMongoConfiguration>(mongoConfiguration);
+            services.AddSingleton<IMongoConfiguration, MongoConfiguration>();
         }
     }
 }

@@ -9,8 +9,8 @@ namespace FinancialControl.Queries.Data
 
         protected MongoDbContext(IMongoConfiguration mongoConfiguration)
         {
-            _mongoClient = new MongoClient(mongoConfiguration.ConnectionString);
-            _database = _mongoClient.GetDatabase(mongoConfiguration.DatabaseName);
+            _mongoClient = new MongoClient(mongoConfiguration.GetConnectionString());
+            _database = _mongoClient.GetDatabase(mongoConfiguration.GetDatabaseName());
         }
 
         protected IMongoCollection<T> GetCollection<T>()

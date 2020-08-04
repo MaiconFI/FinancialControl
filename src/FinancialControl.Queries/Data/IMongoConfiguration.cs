@@ -2,8 +2,8 @@
 {
     public interface IMongoConfiguration
     {
-        string ConnectionString { get; }
+        string GetConnectionString();
 
-        string DatabaseName { get; }
+        string GetDatabaseName();
     }
 }

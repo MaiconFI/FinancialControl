@@ -1,9 +1,18 @@
-﻿namespace FinancialControl.Queries.Data
+﻿using Microsoft.Extensions.Configuration;
+
+namespace FinancialControl.Queries.Data
 {
     public class MongoConfiguration : IMongoConfiguration
     {
-        public string ConnectionString { get; set; }
+        private readonly IConfiguration _configuration;
 
-        public string DatabaseName { get; set; }
+        public MongoConfiguration(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public string GetConnectionString() => _configuration["MongoDb:ConnectionString"];
+
+        public string GetDatabaseName() => _configuration["MongoDb:DatabaseName"];
     }
 }
