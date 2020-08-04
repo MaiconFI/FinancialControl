@@ -1,6 +1,6 @@
-using AutoMapper;
+using FinancialControl.Api.Configurations;
+using FinancialControl.Api.Controllers.V1;
 using FinancialControl.Application.Commands.Expensies.CreateExpense;
-using FinancialControl.Application.Mappers;
 using FinancialControl.Infrastructure.Data;
 using FinancialControl.Infrastructure.Data.IoC;
 using FinancialControl.Queries.DomainEventHandlers.ExpenseCreated;
@@ -9,6 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,13 +27,16 @@ namespace FinancialControl.Api
             _configuration = configuration;
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
             app.UseRouting();
-            app.UseMvc();
+            app.UseMvc()
+                .UseApiVersioning();
+
+            app.UseSwagger(provider);
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -45,7 +49,20 @@ namespace FinancialControl.Api
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
-            AddAutoMapper(services);
+            services.AddApiVersioning(s =>
+            {
+                s.DefaultApiVersion = new ApiVersion(1, 0);
+                s.ReportApiVersions = true;
+                s.AssumeDefaultVersionWhenUnspecified = true;
+
+                s.Conventions.Controller<ExpenseController>().HasApiVersion(new ApiVersion(1, 0));
+            });
+
+            services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV");
+
+            services.AddSwagger();
+
+            services.AddAutoMapper();
 
             services.AddMediatR(typeof(CreateExpenseCommandHandler).GetTypeInfo().Assembly, typeof(ExpenseCreatedDomainEventHandler).GetTypeInfo().Assembly);
             services.AddQueries(_configuration);
@@ -57,17 +74,6 @@ namespace FinancialControl.Api
             });
             MigrateDatabase(services);
             services.AddData();
-        }
-
-        private void AddAutoMapper(IServiceCollection services)
-        {
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new FinancialControlApplicationProfile());
-                mc.AddProfile(new FinancialControlQueriesProfile());
-            });
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
         }
 
         private void MigrateDatabase(IServiceCollection services)

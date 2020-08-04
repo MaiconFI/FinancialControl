@@ -23,7 +23,7 @@ namespace FinancialControl.Api.IntegrationsTests.Queries.Expensies
 
             var expense = await ExpenseGenerator.CreateAsync(client);
 
-            var url = $"/expense/{expense.Id}";
+            var url = $"/api/v1/expense/{expense.Id}";
 
             var response = await client.GetAsync(url, CancellationToken.None);
             var content = await response.Content.ReadAsStringAsync();
@@ -34,7 +34,7 @@ namespace FinancialControl.Api.IntegrationsTests.Queries.Expensies
         }
 
         [Theory]
-        [InlineData("/expense")]
+        [InlineData("/api/v1/expense")]
         public async Task MustGetExpensies(string url)
         {
             var client = _factory.CreateClient();

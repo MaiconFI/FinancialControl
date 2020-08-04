@@ -24,7 +24,7 @@ namespace FinancialControl.Api.IntegrationsTests.Commands
 
             var expense = await ExpenseGenerator.CreateAsync(client);
 
-            var url = $"/expense?id={expense.Id}";
+            var url = $"/api/v1/expense?id={expense.Id}";
 
             var response = await client.DeleteAsync(url, CancellationToken.None);
             var content = await response.Content.ReadAsStringAsync();

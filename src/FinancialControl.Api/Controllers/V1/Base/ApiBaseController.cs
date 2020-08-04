@@ -1,7 +1,7 @@
 ﻿using FinancialControl.Application.Commands.Base;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinancialControl.Api.Controllers.Base
+namespace FinancialControl.Api.Controllers.V1
 {
     [ApiController]
     public abstract class ApiBaseController : ControllerBase

@@ -19,7 +19,7 @@ namespace FinancialControl.Api.IntegrationsTests.Commands
         }
 
         [Theory]
-        [InlineData("/expense")]
+        [InlineData("/api/v1/expense")]
         public async Task MustCreateExpense(string url)
         {
             var client = _factory.CreateClient();

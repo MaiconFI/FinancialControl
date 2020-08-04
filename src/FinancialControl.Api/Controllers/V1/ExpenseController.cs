@@ -1,5 +1,4 @@
-﻿using FinancialControl.Api.Controllers.Base;
-using FinancialControl.Application.Commands.Expensies.CreateExpense;
+﻿using FinancialControl.Application.Commands.Expensies.CreateExpense;
 using FinancialControl.Application.Commands.Expensies.RemoveExpense;
 using FinancialControl.Application.Commands.Expensies.UpdateExpense;
 using FinancialControl.Queries;
@@ -10,9 +9,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FinancialControl.Api.Controllers
+namespace FinancialControl.Api.Controllers.V1
 {
-    [Route("/expense")]
+    [Route("api/v{version:apiVersion}/expense")]
+    [ApiVersion("1")]
     public class ExpenseController : ApiBaseController
     {
         private readonly IMediator _mediator;
