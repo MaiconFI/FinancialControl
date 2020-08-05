@@ -4,16 +4,11 @@ services:
   financialcontrol.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80      
       - ConnectionStrings__FinancialControlContext=Server=sqldata;Database=FinancialControl;User Id=sa;Password=Pass@word
-      - MongoDb__ConnectionString=${MONGO_DB}
-      - MongoDb__DatabaseName=FinancialControl
+      - MongoDb__ConnectionString=${MONGODB_CONNECTIONSTRING:-mongodb://nosqldata}
+      - MongoDb__DatabaseName=${MONGODB_DATABASENAME:-FinancialControl}
     ports:
       - "5101:80"
-      - "443"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
   sqldata:
     environment:
