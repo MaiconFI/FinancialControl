@@ -4,7 +4,7 @@
 
 Financial control application with CQRS and Event Sourcing.
 
-Aplicação ASP.NET Core para realizar o gerencialento do financeiro. Foram utilizados os padrões arquiteturais CQRS e Event Sourcing, possibilitando
+Aplicação ASP.NET Core para realizar o gerenciamento do financeiro. Foram utilizados os padrões arquiteturais CQRS e Event Sourcing, possibilitando
 que todas as alterações sejam replicadas para o banco de dados NoSQL. 
 
 Foi configurado o arquivo docker-compose com a aplicação e suas dependências. Para testar execute o seguinte comando:
