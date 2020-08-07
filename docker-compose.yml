@@ -3,6 +3,7 @@ version: '3.4'
 services:
   financialcontrol.api:
     image: ${DOCKER_REGISTRY-}financialcontrolapi
+    container_name: financialcontrolapi
     build:
       context: .
       dockerfile: src/FinancialControl.Api/Dockerfile
@@ -11,7 +12,9 @@ services:
       - nosqldata
       
   sqldata:
+    container_name: sqldata
     image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
 
   nosqldata:
     image: mongo
+    container_name: nosqldata

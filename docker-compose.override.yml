@@ -16,17 +16,7 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - "12433:1433"
-    volumes:
-      - financialcontrol-sqldata:/var/opt/mssql
 
   nosqldata:
     ports:
       - "27017:27017"
-    volumes:
-      - financialcontrol-nosqldata:/data/db
-
-volumes:
-  financialcontrol-nosqldata:
-    driver: local
-  financialcontrol-sqldata:
-    driver: local
