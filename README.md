@@ -4,15 +4,14 @@
 
 Financial control application with CQRS and Event Sourcing.
 
-Aplicação ASP.NET Core para realizar o gerenciamento do financeiro. Foram utilizados os padrões arquiteturais CQRS e Event Sourcing, possibilitando
-que todas as alterações sejam replicadas para o banco de dados NoSQL. 
+ASP.NET Core application to perform the financial management. The architectural patterns CQRS and Event Sourcing were used, allowing the replication of all changes to the NoSQL database.
 
-Foi configurado o arquivo docker-compose com a aplicação e suas dependências. Para testar execute o seguinte comando:
+The docker-compose file was configured with the application and its dependencies. To test run the following command:
 ```
 docker-compose up --build -d
 ```
 
-Foi criada e disponibilizada uma imagem da aplicação no Docker Hub:
+An image of the application was created and made available on the Docker Hub:
 ```
 https://hub.docker.com/r/maiconfi/financial-control
 ```
