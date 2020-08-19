@@ -11,7 +11,4 @@ The docker-compose file was configured with the application and its dependencies
 docker-compose up --build -d
 ```
 
-An image of the application was created and made available on the Docker Hub:
-```
-https://hub.docker.com/r/maiconfi/financial-control
-```
+An image of the application was created and made available on the [Docker Hub](https://hub.docker.com/r/maiconfi/financial-control).
